@@ -1,8 +1,11 @@
 // SPDX-License-Identifier: GPL-2.0
 #include "qcom-msm8974-sony-xperia-rhine.dtsi"
 
+/* This device has Maxim touchscreen instead of Synaptics once */
+/delete-node/ &blsp1_i2c2;
+
 / {
-	model = "Sony Xperia Z Ultra";
+	model = "Sony Xperia Z Ultra Test";
 	compatible = "sony,xperia-togari", "qcom,msm8974";
 	chassis-type = "handset";
 };
