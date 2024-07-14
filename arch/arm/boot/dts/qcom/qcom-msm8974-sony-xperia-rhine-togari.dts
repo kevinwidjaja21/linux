@@ -2,10 +2,26 @@
 #include "qcom-msm8974-sony-xperia-rhine.dtsi"
 
 /* This device has Maxim touchscreen instead of Synaptics once */
-/delete-node/ &blsp1_i2c2;
+/delete-node/ &touchscreen;
 
 / {
-	model = "Sony Xperia Z Ultra Test";
+	model = "Sony Xperia Z Ultra Test 2";
 	compatible = "sony,xperia-togari", "qcom,msm8974";
 	chassis-type = "handset";
 };
+
+&blsp2_i2c2 {
+	status = "disabled";
+	clock-frequency = <355000>;
+
+	touchscreen: maxim_max1187x@48 {
+		compatible = "maxim,max1187x";
+		reg = <0x48>;
+
+		interrupts-extended = <&tlmm 61 IRQ_TYPE_EDGE_FALLING>;
+
+		vdd-supply = <&pm8941_l22>;
+
+	};
+};
+
