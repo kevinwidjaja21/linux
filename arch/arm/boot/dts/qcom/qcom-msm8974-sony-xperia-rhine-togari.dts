@@ -5,23 +5,56 @@
 /delete-node/ &touchscreen;
 
 / {
-	model = "Sony Xperia Z Ultra Test 2";
+	model = "Sony Xperia Z Ultra Test 3";
 	compatible = "sony,xperia-togari", "qcom,msm8974";
 	chassis-type = "handset";
 };
 
 &blsp2_i2c2 {
-	status = "disabled";
-	clock-frequency = <355000>;
+	status = "okay";
 
-	touchscreen: maxim_max1187x@48 {
-		compatible = "maxim,max1187x";
+	clock-frequency = <355000>;
+	vdd-supply = <&pm8941_l22>;
+
+	touchscreen: maxim_max1187x_tsc@48 {
+		compatible = "maxim,max1187x_tsc";
 		reg = <0x48>;
 
-		interrupts-extended = <&tlmm 61 IRQ_TYPE_EDGE_FALLING>;
+		interrupt-parent = <&tlmm>;
+		interrupts = <61 0x2>;
 
 		vdd-supply = <&pm8941_l22>;
 
+		touch_vdd-supply_name = "vdd";
+		tirq-gpio = <&tlmm 61 0x2>;
+		reset-gpio = <&tlmm 85 0x2>;
+		reset_l2h = <0>;
+		enable_resume_por = <1>;
+		defaults_allow = <0>;
+		default_config_id = <0>;
+		default_chip_id = <0>;
+		fw_name = "touch_chip_id_0x%02x_config_id_0x%%04x.bin";
+		i2c_words = <128>;
+		coordinate_settings = <0x4>;
+		panel_margin_xl = <0>;
+		lcd_x = <1080>;
+		panel_margin_xh = <0>;
+		panel_margin_yl = <0>;
+		lcd_y = <1920>;
+		panel_margin_yh = <0>;
+		num_sensor_x = <24>;
+		num_sensor_y = <40>;
+		button_code0 = <0>;
+		button_code1 = <0>;
+		button_code2 = <0>;
+		button_code3 = <0>;
+		touch_pressure_enabled = <1>;
+		touch_size_enabled = <0>;
+		touch_orientation_enabled = <0>;
+		glove_enabled = <0>;
+		report_pen_as_finger = <1>;
+		wakeup_gesture_support = <0>;
+		wakeup_gesture_timeout = <0>;
 	};
 };
 
